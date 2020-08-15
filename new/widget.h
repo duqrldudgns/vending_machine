@@ -16,7 +16,8 @@ public:
     ~Widget();
     int money {0};
     void changeMoney(int diff);
-
+    void changeEnabled();
+    void calculation(int *change_money);
 private slots:
     void on_pb10_clicked();
 
