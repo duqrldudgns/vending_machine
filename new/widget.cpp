@@ -7,10 +7,7 @@ Widget::Widget(QWidget *parent)
     , ui(new Ui::Widget)
 {
     ui->setupUi(this);
-    ui->pbReset->setEnabled(false);
-    ui->pbCoffee->setEnabled(false);
-    ui->pbTea->setEnabled(false);
-    ui->pbMilk->setEnabled(false);
+    changeEnabled();
 }
 
 Widget::~Widget()
@@ -71,25 +68,26 @@ void Widget::on_pbMilk_clicked()
     Widget::changeMoney(-200);
 }
 
-void Widget::calculation(int *change_money)
+void Widget::calculation(QString &str)
 {
+    int change[4];
     int value[4]={500,100,50,10};
+    str = QString("Change Money \n500won count : %1 \n100won count : %2 \n50won count : %3 \n10won count : %4");
 
     for(int i=0; i<4; i++){
-        change_money[i] = money / value[i];
+        change[i] = money / value[i];
         money = money % value[i];
+
+        str = str.arg(change[i]);
     }
 }
 
 void Widget::on_pbReset_clicked()
 {
     QMessageBox m;
-    char str[100];
-    int change[4];
+    QString str;
 
-    Widget::calculation(change);
-
-    sprintf(str,"Change Money \n500won count : %d \n100won count : %d \n50won count : %d \n10won count : %d ", change[0], change[1], change[2], change[3]);
+    Widget::calculation(str);
     m.information(nullptr,"Reset", str);
 
     Widget::changeMoney(-money);

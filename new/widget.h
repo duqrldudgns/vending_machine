@@ -17,7 +17,7 @@ public:
     int money {0};
     void changeMoney(int diff);
     void changeEnabled();
-    void calculation(int *change_money);
+    void calculation(QString &str);
 private slots:
     void on_pb10_clicked();
 
